@@ -1,0 +1,60 @@
+@inherits LayoutComponentBase
+
+<div class="d-flex flex-column min-vh-100 bg-light">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-white" href="/">
+                <i class="bi bi-people-fill me-2"></i> AMS
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <NavLink class="nav-link" href="/" Match="NavLinkMatch.All">
+                            <i class="bi bi-speedometer2 me-1"></i> Dashboard
+                        </NavLink>
+                    </li>
+                    <li class="nav-item">
+                        <NavLink class="nav-link" href="/hr">
+                            <i class="bi bi-person-badge me-1"></i> HR
+                        </NavLink>
+                    </li>
+                    <li class="nav-item">
+                        <NavLink class="nav-link" href="/attendance">
+                            <i class="bi bi-fingerprint me-1"></i> Attendance
+                        </NavLink>
+                    </li>
+                    <li class="nav-item">
+                        <NavLink class="nav-link" href="/leaves">
+                            <i class="bi bi-calendar-check me-1"></i> Leaves
+                        </NavLink>
+                    </li>
+                    <li class="nav-item">
+                        <NavLink class="nav-link" href="/reports">
+                            <i class="bi bi-bar-chart-line me-1"></i> Reports
+                        </NavLink>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <main class="container my-4 flex-grow-1">
+        <div class="card shadow-lg border-0 rounded-3">
+            <div class="card-body p-4">
+                @Body
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white text-center py-3 mt-auto">
+        <small>&copy; @DateTime.Now.Year AMS - Attendance Management System</small>
+    </footer>
+</div>

@@ -1,0 +1,43 @@
+@page "/"
+@namespace AMS.Web.Pages
+@using AMSWeb   @* <-- replace AMSWeb with your frontend project namespace *@
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AMS - Attendance Management System</title>
+    <base href="/" />
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
+
+    <!-- Custom Styles -->
+    <link href="css/site.css" rel="stylesheet" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png" />
+</head>
+<body>
+    <app>
+        @* 👇 disable prerendering so JS + HttpClient work immediately *@
+       <component type="typeof(App)" render-mode="Server" />
+
+    </app>
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Blazor Script -->
+    <script src="_framework/blazor.server.js"></script>
+    <script src="/js/camera.js"></script>
+</body>
+</html>

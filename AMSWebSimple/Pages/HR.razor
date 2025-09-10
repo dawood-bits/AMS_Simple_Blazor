@@ -1,0 +1,241 @@
+@page "/hr"
+@inject HttpClient Http
+@using AMSWeb.DTOs
+
+<h3>Employees</h3>
+
+<button class="btn btn-primary mb-3" @onclick="ShowCreateForm">➕ Create New Employee</button>
+
+@if (users == null)
+{
+    <p><em>Loading...</em></p>
+}
+else if (users.Count == 0)
+{
+    <p>No employees found.</p>
+}
+else
+{
+    <!-- your table code unchanged -->
+}
+
+@if (showForm)
+{
+    <!-- your form code unchanged -->
+}
+
+@code {
+    private List<UserDto>? users;
+    private RegisterRequest newUser = new();
+    private bool showForm = false;
+    private bool loaded = false;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender && !loaded)
+        {
+            await LoadUsers();
+            loaded = true;
+            StateHasChanged();
+        }
+    }
+
+    private async Task LoadUsers()
+    {
+        try
+        {
+            users = await Http.GetFromJsonAsync<List<UserDto>>("http://localhost:5157/api/users");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"❌ Failed to load users: {ex.Message}");
+            users = new List<UserDto>();
+        }
+    }
+
+    private async Task CreateUser()
+    {
+        try
+        {
+            var response = await Http.PostAsJsonAsync("http://localhost:5157/api/auth/register", newUser);
+            if (response.IsSuccessStatusCode)
+            {
+                newUser = new RegisterRequest();
+                showForm = false;
+                await LoadUsers();
+                StateHasChanged();
+            }
+            else
+            {
+                var error = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"❌ Error creating user: {error}");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"❌ Exception: {ex.Message}");
+        }
+    }
+
+    private void ShowCreateForm() => showForm = true;
+    private void HideForm() => showForm = false;
+}
+
+
+
+
+
+
+
+@* @page "/hr"
+@using Microsoft.AspNetCore.Components.Forms
+@inject IHttpClientFactory HttpClientFactory
+
+<h3 class="mb-4">HR - Users</h3>
+
+<div class="row">
+    <!-- Create User Form -->
+    <div class="col-md-6">
+        <EditForm Model="@newUser" OnValidSubmit="Create">
+            <DataAnnotationsValidator />
+            <div class="mb-2">
+                <label class="form-label">Full Name</label>
+                <InputText class="form-control" @bind-Value="newUser.FullName" />
+            </div>
+            <div class="mb-2">
+                <label class="form-label">Email</label>
+                <InputText class="form-control" @bind-Value="newUser.Email" />
+            </div>
+            <div class="mb-2">
+                <label class="form-label">Password</label>
+                <InputText type="password" class="form-control" @bind-Value="newUser.Password" />
+            </div>
+            <div class="mb-2">
+                <label class="form-label">Role</label>
+                <InputText class="form-control" @bind-Value="newUser.Role" />
+            </div>
+            <button type="submit" class="btn btn-primary">Create</button>
+        </EditForm>
+    </div>
+
+    <!-- User List -->
+    <div class="col-md-6">
+        <h5>Users</h5>
+        @if (users.Count == 0)
+        {
+            <div class="alert alert-info">No users found.</div>
+        }
+        else
+        {
+            <ul class="list-group">
+                @foreach (var u in users)
+                {
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>@u.FullName (@u.Role) - @u.Email</span>
+                        <button class="btn btn-sm btn-outline-secondary" @onclick="() => SelectUser(u)">Enroll Face</button>
+                    </li>
+                }
+            </ul>
+        }
+    </div>
+</div>
+
+<!-- Face Enrollment -->
+@if (selectedUserId != null)
+{
+    <hr />
+    <h5>Enroll Face for UserId: @selectedUserId</h5>
+    <InputFile OnChange="UploadFace" class="form-control" />
+}
+
+@code {
+    // --- DTOs ---
+    class RegisterRequest
+    {
+        public string FullName { get; set; } = "";
+        public string Email { get; set; } = "";
+        public string Password { get; set; } = "";
+        public string Role { get; set; } = "Employee";
+    }
+
+    class UserDto
+    {
+        public int UserId { get; set; }
+        public string FullName { get; set; } = "";
+        public string Email { get; set; } = "";
+        public string Role { get; set; } = "";
+    }
+
+    // --- State ---
+    RegisterRequest newUser = new();
+    List<UserDto> users = new();
+    int? selectedUserId;
+
+    // --- Lifecycle ---
+    protected override async Task OnInitializedAsync() => await Load();
+
+    // --- Methods ---
+async Task Load()
+{
+    try
+    {
+        var http = HttpClientFactory.CreateClient("AMS.Api");
+        users = await http.GetFromJsonAsync<List<UserDto>>("users") ?? new();
+    }
+    catch (Exception ex)
+    {
+        Console.Error.WriteLine($"Failed to load users: {ex.Message}");
+    }
+}
+
+async Task Create()
+{
+    try
+    {
+        var http = HttpClientFactory.CreateClient("AMS.Api");
+        var resp = await http.PostAsJsonAsync("users", newUser);
+        if (resp.IsSuccessStatusCode)
+        {
+            newUser = new();
+            await Load();
+        }
+        else
+        {
+            Console.Error.WriteLine($"Create failed: {resp.StatusCode}");
+        }
+    }
+    catch (Exception ex)
+    {
+        Console.Error.WriteLine($"Error creating user: {ex.Message}");
+    }
+}
+
+
+
+    void SelectUser(UserDto u) => selectedUserId = u.UserId;
+
+    async Task UploadFace(InputFileChangeEventArgs e)
+    {
+        if (selectedUserId == null) return;
+
+        try
+        {
+            var file = e.File;
+            using var stream = file.OpenReadStream(maxAllowedSize: 10_000_000); // 10 MB
+            var content = new MultipartFormDataContent();
+            content.Add(new StreamContent(stream), "file", file.Name);
+
+            var http = HttpClientFactory.CreateClient("api");
+            var resp = await http.PostAsync($"api/users/{selectedUserId}/face", content);
+
+            if (resp.IsSuccessStatusCode)
+                Console.WriteLine("Face uploaded successfully!");
+            else
+                Console.Error.WriteLine($"Failed to upload face: {resp.StatusCode}");
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"Error uploading face: {ex.Message}");
+        }
+    }
+} *@

@@ -1,0 +1,36 @@
+@page "/leaves"
+@inject IHttpClientFactory HttpClientFactory
+
+<h3>Leaves</h3>
+<div class="row">
+  <div class="col-md-6">
+    <div class="mb-2">
+      <label class="form-label">UserId</label>
+      <InputNumber @bind-Value="leave.UserId" class="form-control" />
+    </div>
+    <div class="mb-2">
+      <label class="form-label">Start</label>
+      <InputDate @bind-Value="leave.StartDate" class="form-control" />
+    </div>
+    <div class="mb-2">
+      <label class="form-label">End</label>
+      <InputDate @bind-Value="leave.EndDate" class="form-control" />
+    </div>
+    <div class="mb-2">
+      <label class="form-label">Reason</label>
+      <InputText @bind-Value="leave.Reason" class="form-control" />
+    </div>
+    <button class="btn btn-primary" @onclick="Apply">Apply</button>
+  </div>
+</div>
+
+@code {
+  class LeaveRequest { public int UserId { get; set; } public DateTime StartDate { get; set; } = DateTime.Today; public DateTime EndDate { get; set; } = DateTime.Today; public string Reason { get; set; } = ""; }
+  LeaveRequest leave = new();
+
+  async Task Apply()
+  {
+    var http = HttpClientFactory.CreateClient("api");
+    await http.PostAsJsonAsync("api/leaves/apply", leave);
+  }
+}

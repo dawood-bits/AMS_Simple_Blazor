@@ -1,0 +1,74 @@
+@page "/login"
+@using System.ComponentModel.DataAnnotations
+@using AMS.Web.Services
+@using Microsoft.AspNetCore.Components.Forms
+@inject NavigationManager Navigation
+@inject AMS.Web.Services.AuthService AuthService
+@inject CustomAuthStateProvider AuthStateProvider
+
+
+
+<h3 class="text-2xl font-bold mb-4">Login</h3>
+
+@if (!string.IsNullOrEmpty(ErrorMessage))
+{
+    <div class="text-red-600 mb-3">@ErrorMessage</div>
+}
+
+<EditForm Model="loginModel" OnValidSubmit="HandleLogin">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="mb-3">
+        <label class="block mb-1">Email</label>
+        <InputText @bind-Value="loginModel.Email" class="border rounded px-2 py-1 w-full" />
+        <ValidationMessage For="@(() => loginModel.Email)" />
+    </div>
+
+    <div class="mb-3">
+        <label class="block mb-1">Password</label>
+        <InputText @bind-Value="loginModel.Password" type="password" class="border rounded px-2 py-1 w-full" />
+        <ValidationMessage For="@(() => loginModel.Password)" />
+    </div>
+
+    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">
+        Login
+    </button>
+</EditForm>
+
+@code {
+    private LoginModel loginModel = new();
+    private string? ErrorMessage;
+
+    private async Task HandleLogin()
+    {
+        var success = await AuthService.LoginAsync(loginModel.Email, loginModel.Password);
+
+        if (success)
+        {
+           var token = await AuthService.GetTokenAsync();
+           if (!string.IsNullOrEmpty(token))
+              {
+            
+                  AuthStateProvider.NotifyUserAuthentication(token);
+              }
+
+            // ✅ redirect to Dashboard
+            Navigation.NavigateTo("/dashboard");
+        }
+        else
+        {
+            ErrorMessage = "Invalid email or password.";
+        }
+    }
+
+    public class LoginModel
+    {
+        [Required(ErrorMessage = "Email is required")]
+        [EmailAddress(ErrorMessage = "Invalid email format")]
+        public string Email { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "Password is required")]
+        public string Password { get; set; } = string.Empty;
+    }
+}

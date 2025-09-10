@@ -1,0 +1,26 @@
+@page "/reports"
+@inject NavigationManager Nav
+
+<h3>Reports</h3>
+<div class="row g-2">
+  <div class="col-auto">
+    <input class="form-control" type="date" @bind="fromDate" />
+  </div>
+  <div class="col-auto">
+    <input class="form-control" type="date" @bind="toDate" />
+  </div>
+  <div class="col-auto">
+    <button class="btn btn-outline-primary" @onclick="Excel">Export Excel</button>
+  </div>
+  <div class="col-auto">
+    <button class="btn btn-outline-danger" @onclick="Pdf">Export PDF</button>
+  </div>
+</div>
+
+@code {
+    DateTime fromDate = DateTime.Today.AddDays(-7);
+    DateTime toDate = DateTime.Today;
+
+    void Excel() => Nav.NavigateTo($"http://localhost:5157/api/reports/attendance/excel?from={fromDate:O}&to={toDate:O}", forceLoad: true);
+    void Pdf() => Nav.NavigateTo($"http://localhost:5157/api/reports/attendance/pdf?from={fromDate:O}&to={toDate:O}", forceLoad: true);
+}

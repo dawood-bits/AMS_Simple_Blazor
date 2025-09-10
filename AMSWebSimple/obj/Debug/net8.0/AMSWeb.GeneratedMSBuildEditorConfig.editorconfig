@@ -1,0 +1,69 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = AMSWeb
+build_property.RootNamespace = AMSWeb
+build_property.ProjectDir = /home/mdk/NewProjects/AMS_Simple_Blazor/AMSWebSimple/
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = /home/mdk/NewProjects/AMS_Simple_Blazor/AMSWebSimple
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 8.0
+build_property.EnableCodeStyleSeverity = 
+
+[/home/mdk/NewProjects/AMS_Simple_Blazor/AMSWebSimple/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/mdk/NewProjects/AMS_Simple_Blazor/AMSWebSimple/Pages/Attendance.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQXR0ZW5kYW5jZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/mdk/NewProjects/AMS_Simple_Blazor/AMSWebSimple/Pages/Employees.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRW1wbG95ZWVzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/mdk/NewProjects/AMS_Simple_Blazor/AMSWebSimple/Pages/HR.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSFIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/mdk/NewProjects/AMS_Simple_Blazor/AMSWebSimple/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/mdk/NewProjects/AMS_Simple_Blazor/AMSWebSimple/Pages/Leaves.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvTGVhdmVzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/mdk/NewProjects/AMS_Simple_Blazor/AMSWebSimple/Pages/Login.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvTG9naW4ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/mdk/NewProjects/AMS_Simple_Blazor/AMSWebSimple/Pages/Reports.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUmVwb3J0cy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/mdk/NewProjects/AMS_Simple_Blazor/AMSWebSimple/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL01haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/mdk/NewProjects/AMS_Simple_Blazor/AMSWebSimple/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/mdk/NewProjects/AMS_Simple_Blazor/AMSWebSimple/Pages/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/mdk/NewProjects/AMS_Simple_Blazor/AMSWebSimple/Pages/_Host.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvX0hvc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 

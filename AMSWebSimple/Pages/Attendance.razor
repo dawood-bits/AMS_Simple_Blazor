@@ -1,0 +1,39 @@
+@page "/attendance"
+@using Microsoft.JSInterop
+@inject IHttpClientFactory HttpClientFactory
+@inject IJSRuntime JSRuntime
+
+<h1>Camera Attendance</h1>
+<div class="mb-2">
+    <video id="cam" autoplay playsinline class="border rounded" width="480" height="360"></video>
+</div>
+<div class="mb-3">
+    <button class="btn btn-primary" @onclick="Capture">I'm Present</button>
+</div>
+<div>
+    <pre>@result</pre>
+</div>
+
+@code {
+    string result = "";
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JS.InvokeVoidAsync("camera.start");
+        }
+    }
+
+    async Task Capture()
+    {
+        var bytes = await JS.InvokeAsync<byte[]>("camera.captureJpeg");
+        var http = HttpClientFactory.CreateClient("api");
+        using var content = new MultipartFormDataContent();
+        content.Add(new ByteArrayContent(bytes), "image", "capture.jpg");
+        var res = await http.PostAsync("api/attendance/camera", content);
+        result = await res.Content.ReadAsStringAsync();
+    }
+
+    [Inject] public Microsoft.JSInterop.IJSRuntime JS { get; set; } = default!;
+}
