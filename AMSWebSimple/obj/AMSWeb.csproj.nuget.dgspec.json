@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "/home/mdk/NewProjects/AMS_Simple_Blazor/AMSWebSimple/AMSWebSimple.csproj": {}
+    "/home/mdk/NewProjects/AMS_Simple_Blazor/AMSWebSimple/AMSWeb.csproj": {}
   },
   "projects": {
-    "/home/mdk/NewProjects/AMS_Simple_Blazor/AMSWebSimple/AMSWebSimple.csproj": {
+    "/home/mdk/NewProjects/AMS_Simple_Blazor/AMSWebSimple/AMSWeb.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/mdk/NewProjects/AMS_Simple_Blazor/AMSWebSimple/AMSWebSimple.csproj",
-        "projectName": "AMSWebSimple",
-        "projectPath": "/home/mdk/NewProjects/AMS_Simple_Blazor/AMSWebSimple/AMSWebSimple.csproj",
+        "projectUniqueName": "/home/mdk/NewProjects/AMS_Simple_Blazor/AMSWebSimple/AMSWeb.csproj",
+        "projectName": "AMSWeb",
+        "projectPath": "/home/mdk/NewProjects/AMS_Simple_Blazor/AMSWebSimple/AMSWeb.csproj",
         "packagesPath": "/home/mdk/.nuget/packages/",
         "outputPath": "/home/mdk/NewProjects/AMS_Simple_Blazor/AMSWebSimple/obj/",
         "projectStyle": "PackageReference",

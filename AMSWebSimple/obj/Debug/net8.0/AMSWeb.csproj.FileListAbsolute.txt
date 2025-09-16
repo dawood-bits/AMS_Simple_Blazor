@@ -1,0 +1,9 @@
+/home/mdk/NewProjects/AMS_Simple_Blazor/AMSWebSimple/obj/Debug/net8.0/AMSWeb.csproj.AssemblyReference.cache
+/home/mdk/NewProjects/AMS_Simple_Blazor/AMSWebSimple/obj/Debug/net8.0/AMSWeb.GeneratedMSBuildEditorConfig.editorconfig
+/home/mdk/NewProjects/AMS_Simple_Blazor/AMSWebSimple/obj/Debug/net8.0/AMSWeb.AssemblyInfoInputs.cache
+/home/mdk/NewProjects/AMS_Simple_Blazor/AMSWebSimple/obj/Debug/net8.0/AMSWeb.AssemblyInfo.cs
+/home/mdk/NewProjects/AMS_Simple_Blazor/AMSWebSimple/obj/Debug/net8.0/AMSWeb.csproj.CoreCompileInputs.cache
+/home/mdk/NewProjects/AMS_Simple_Blazor/AMSWebSimple/obj/Debug/net8.0/AMSWeb.MvcApplicationPartsAssemblyInfo.cache
+/home/mdk/NewProjects/AMS_Simple_Blazor/AMSWebSimple/obj/Debug/net8.0/AMSWeb.RazorAssemblyInfo.cache
+/home/mdk/NewProjects/AMS_Simple_Blazor/AMSWebSimple/obj/Debug/net8.0/AMSWeb.RazorAssemblyInfo.cs
+/home/mdk/NewProjects/AMS_Simple_Blazor/AMSWebSimple/obj/Debug/net8.0/AMSWeb.sourcelink.json
